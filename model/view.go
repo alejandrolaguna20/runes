@@ -1,14 +1,27 @@
 package model
 
-import "github.com/charmbracelet/lipgloss"
+import (
+	"github.com/charmbracelet/lipgloss"
+	"github.com/mitchellh/go-wordwrap"
+)
 
 func (m Model) View() string {
+	var content string
+
+	if m.CurrentCard.IsFlipped {
+		content = m.CurrentCard.Back
+	} else {
+		content = m.CurrentCard.Front
+	}
+
+	wrapped := wordwrap.WrapString(content, uint(m.viewport.Width)/3)
+
 	mainContent := lipgloss.NewStyle().
 		BorderStyle(lipgloss.RoundedBorder()).
 		BorderForeground(lipgloss.Color(m.CardColor)).
 		Padding(2, 4).
 		Align(lipgloss.Center).
-		Render("hello, runes\ntest")
+		Render(wrapped)
 
 	bottomText := lipgloss.NewStyle().
 		Foreground(lipgloss.Color("241")).
