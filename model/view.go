@@ -27,6 +27,16 @@ func viewCard(m Model) string {
 	return card
 }
 
+func ViewKeys(m Model) string {
+	var keys string
+	okText := lipgloss.NewStyle().Margin(0, 1).Foreground(lipgloss.Color("108")).Render("[o] to mark it as correct")
+	koText := lipgloss.NewStyle().Margin(0, 1).Foreground(lipgloss.Color("167")).Render("[k] to mark it as incorrect")
+	nextText := lipgloss.NewStyle().Margin(0, 1).Foreground(lipgloss.Color("116")).Render("[space] to flip it")
+	keys = lipgloss.JoinHorizontal(lipgloss.Center, koText, okText)
+	keys = lipgloss.JoinVertical(lipgloss.Center, nextText, keys)
+	return keys
+}
+
 func (m Model) View() string {
 	bottomText := lipgloss.NewStyle().
 		Foreground(lipgloss.Color("241")).
@@ -39,6 +49,7 @@ func (m Model) View() string {
 		lipgloss.Center,
 		cardStats,
 		viewCard(m),
+		ViewKeys(m),
 		bottomText,
 	)
 
