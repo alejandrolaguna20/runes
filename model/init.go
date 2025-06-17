@@ -6,8 +6,9 @@ import (
 )
 
 type Model struct {
-	viewport viewport.Model
-	ready    bool
+	viewport  viewport.Model
+	CardColor string
+	ready     bool
 }
 
 func (m Model) Init() tea.Cmd {
