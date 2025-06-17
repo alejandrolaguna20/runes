@@ -13,7 +13,7 @@ type Model struct {
 	CardColor   string
 	ready       bool
 	Cards       []cards.Card
-	CurrentCard cards.Card
+	CurrentCard int
 }
 
 func CreateModel() Model {
@@ -21,7 +21,7 @@ func CreateModel() Model {
 		CardColor: "96",
 		Cards:     cards.GenerateMockCards(),
 	}
-	m.CurrentCard = m.Cards[rand.Intn(len(m.Cards))]
+	m.CurrentCard = rand.Intn(len(m.Cards) - 1)
 	return m
 }
 
