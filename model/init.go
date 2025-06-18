@@ -1,7 +1,7 @@
 package model
 
 import (
-	"math/rand"
+	//	"math/rand"
 
 	"github.com/alejandrolaguna20/runes/cards"
 	"github.com/alejandrolaguna20/runes/decks"
@@ -15,7 +15,7 @@ type Model struct {
 	CardColor    lipgloss.Color
 	ready        bool
 	Decks        []string
-	SelectedDeck decks.Deck
+	SelectedDeck *decks.Deck
 	Cards        []cards.Card
 	CurrentCard  int
 }
@@ -27,7 +27,7 @@ var CardDefaultColor = lipgloss.Color("96")
 var MuteColor = lipgloss.Color("241")
 
 func CreateModel() Model {
-	decks, err := decks.ListDecks()
+	decks, err := decks.ListDeckNames()
 	if err != nil {
 		panic("could not load decks!")
 	}
@@ -37,7 +37,8 @@ func CreateModel() Model {
 		Decks:     decks,
 		Cards:     []cards.Card{},
 	}
-	m.CurrentCard = rand.Intn(len(m.Cards) - 1)
+	m.CurrentCard = 0
+	//m.CurrentCard = rand.Intn(len(m.Cards) - 1)
 	return m
 }
 

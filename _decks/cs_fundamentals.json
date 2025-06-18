@@ -1,0 +1,79 @@
+{
+  "created_at": "2025-06-18T00:00:00Z",
+  "updated_at": "2025-06-18T00:00:00Z",
+  "last_used": "2025-06-18T00:00:00Z",
+  "current_card": 0,
+  "times_trained": 0,
+  "cards": [
+    {
+      "front": "What does 'Big O' notation describe?",
+      "back": "Big O notation describes the upper bound of an algorithm's time or space complexity in the worst-case scenario. It helps compare algorithm efficiency as input size grows.",
+      "is_flipped": false,
+      "times_correct": 0,
+      "times_incorrect": 0
+    },
+    {
+      "front": "What is the difference between a stack and a queue?",
+      "back": "Stack: Last In, First Out (LIFO) - elements added/removed from the top. Queue: First In, First Out (FIFO) - elements added at rear, removed from front.",
+      "is_flipped": false,
+      "times_correct": 0,
+      "times_incorrect": 0
+    },
+    {
+      "front": "What is a closure in programming?",
+      "back": "A closure is a function that captures and retains access to variables from its outer/enclosing scope, even after the outer function has returned.",
+      "is_flipped": false,
+      "times_correct": 0,
+      "times_incorrect": 0
+    },
+    {
+      "front": "What's the time complexity of binary search?",
+      "back": "O(log n) - Binary search eliminates half the search space with each comparison, resulting in logarithmic time complexity.",
+      "is_flipped": false,
+      "times_correct": 0,
+      "times_incorrect": 0
+    },
+    {
+      "front": "What is polymorphism in OOP?",
+      "back": "Polymorphism allows objects of different types to be treated as instances of the same type through a common interface, enabling one interface to represent different underlying forms.",
+      "is_flipped": false,
+      "times_correct": 0,
+      "times_incorrect": 0
+    },
+    {
+      "front": "What is the difference between '==' and '===' in JavaScript?",
+      "back": "'==' performs type coercion and compares values. '===' (strict equality) compares both value and type without coercion. Always prefer '===' for predictable behavior.",
+      "is_flipped": false,
+      "times_correct": 0,
+      "times_incorrect": 0
+    },
+    {
+      "front": "What is a race condition?",
+      "back": "A race condition occurs when multiple threads/processes access shared data concurrently, and the outcome depends on the unpredictable timing of their execution.",
+      "is_flipped": false,
+      "times_correct": 0,
+      "times_incorrect": 0
+    },
+    {
+      "front": "What is memoization?",
+      "back": "Memoization is an optimization technique that stores the results of expensive function calls and returns cached results for identical inputs to avoid redundant calculations.",
+      "is_flipped": false,
+      "times_correct": 0,
+      "times_incorrect": 0
+    },
+    {
+      "front": "What's the difference between HTTP and HTTPS?",
+      "back": "HTTP transmits data in plain text. HTTPS adds SSL/TLS encryption for secure data transmission, authentication, and data integrity protection.",
+      "is_flipped": false,
+      "times_correct": 0,
+      "times_incorrect": 0
+    },
+    {
+      "front": "What is dependency injection?",
+      "back": "Dependency injection is a design pattern where dependencies are provided to an object from external sources rather than the object creating them itself, improving testability and flexibility.",
+      "is_flipped": false,
+      "times_correct": 0,
+      "times_incorrect": 0
+    }
+  ]
+}

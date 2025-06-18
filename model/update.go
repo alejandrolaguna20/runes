@@ -1,6 +1,7 @@
 package model
 
 import (
+	"github.com/alejandrolaguna20/runes/decks"
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -26,19 +27,46 @@ func flipCard(m Model) (tea.Model, tea.Cmd) {
 	return m, nil
 }
 
+func selectDeck(m Model) (tea.Model, tea.Cmd) {
+	var err error
+	m.SelectedDeck, err = decks.LoadDeck(m.Decks[m.CurrentCard])
+	if err != nil {
+		panic(err.Error())
+	}
+	m.Cards = m.SelectedDeck.Cards
+	m.CurrentCard = 0
+	return m, nil
+}
+
+func actOnCard(m Model) (tea.Model, tea.Cmd) {
+	if m.SelectedDeck == nil {
+		return selectDeck(m)
+	} else {
+		return flipCard(m)
+	}
+}
+
 func changeCard(m Model, direction string) (tea.Model, tea.Cmd) {
 	var nextPos int
+	var maxPos int
+
+	if m.SelectedDeck == nil {
+		maxPos = len(m.Decks) - 1
+	} else {
+		maxPos = len(m.Cards) - 1
+	}
+
 	nextPos = m.CurrentCard + 1
 	if direction == "left" {
 		nextPos = m.CurrentCard - 1
 	}
 
-	if nextPos > len(m.Cards)-1 {
+	if nextPos > maxPos {
 		nextPos = 0
 	}
 
 	if nextPos < 0 {
-		nextPos = len(m.Cards) - 1
+		nextPos = maxPos
 	}
 
 	m.CurrentCard = nextPos
@@ -52,7 +80,7 @@ func handleKeys(m Model, msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 	case "left", "right":
 		return changeCard(m, msg.String())
 	case " ":
-		return flipCard(m)
+		return actOnCard(m)
 	}
 	return m, nil
 }

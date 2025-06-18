@@ -1,8 +1,11 @@
 package decks
 
 import (
+	"encoding/json"
 	"fmt"
+	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/alejandrolaguna20/runes/cards"
@@ -17,10 +20,39 @@ type Deck struct {
 	TimesTrained int
 }
 
-// TODO: think about the way/location decks are stored, maybe?
-func ListDecks() ([]string, error) {
-	pattern := filepath.Join("_decks/*.json")
-	decks, err := filepath.Glob(pattern)
-	fmt.Println(decks[0])
-	return decks, err
+func ListDeckNames() ([]string, error) {
+	pattern := filepath.Join("_decks", "*.json")
+	filePaths, err := filepath.Glob(pattern)
+	if err != nil {
+		return nil, err
+	}
+
+	var deckNames []string
+	for _, filePath := range filePaths {
+		name := strings.TrimSuffix(filepath.Base(filePath), ".json")
+		deckNames = append(deckNames, name)
+	}
+	return deckNames, nil
 }
+
+func LoadDeck(filePath string) (*Deck, error) {
+	filePath = "_decks/" + filePath + ".json"
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		return &Deck{}, fmt.Errorf("failed to read deck file %s: %w", filePath, err)
+	}
+
+	var deck Deck
+	err = json.Unmarshal(data, &deck)
+	if err != nil {
+		return &Deck{}, fmt.Errorf("failed to parse deck JSON in %s: %w", filePath, err)
+	}
+
+	return &deck, nil
+}
+
+// Then load individual deck when selected
+//func LoadDeck(name string) (Deck, error) {
+//	filePath := filepath.Join("_decks", name+".json")
+//	return loadDeckFromFile(filePath)
+//}
