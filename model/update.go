@@ -18,9 +18,9 @@ func resize(m Model, msg tea.WindowSizeMsg) (tea.Model, tea.Cmd) {
 
 func flipCard(m Model) (tea.Model, tea.Cmd) {
 	if m.Cards[m.CurrentCard].IsFlipped {
-		m.CardColor = "96"
+		m.CardColor = CardDefaultColor
 	} else {
-		m.CardColor = "116"
+		m.CardColor = CardBlueColor
 	}
 	m.Cards[m.CurrentCard].IsFlipped = !m.Cards[m.CurrentCard].IsFlipped
 	return m, nil

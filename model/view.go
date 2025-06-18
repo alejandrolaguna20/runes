@@ -20,7 +20,7 @@ func viewCard(m Model) string {
 
 	card := lipgloss.NewStyle().
 		BorderStyle(lipgloss.RoundedBorder()).
-		BorderForeground(lipgloss.Color(m.CardColor)).
+		BorderForeground(m.CardColor).
 		Padding(2, 4).
 		Align(lipgloss.Center).
 		Render(wrapped)
@@ -29,9 +29,9 @@ func viewCard(m Model) string {
 
 func ViewKeys(m Model) string {
 	var keys string
-	okText := lipgloss.NewStyle().Margin(0, 1).Foreground(lipgloss.Color("108")).Render("[o] to mark it as correct")
-	koText := lipgloss.NewStyle().Margin(0, 1).Foreground(lipgloss.Color("167")).Render("[k] to mark it as incorrect")
-	nextText := lipgloss.NewStyle().Margin(0, 1).Foreground(lipgloss.Color("116")).Render("[space] to flip it")
+	okText := lipgloss.NewStyle().Margin(0, 1).Foreground(MuteColor).Render("[o] to mark it as correct")
+	koText := lipgloss.NewStyle().Margin(0, 1).Foreground(KoColor).Render("[k] to mark it as incorrect")
+	nextText := lipgloss.NewStyle().Margin(0, 1).Foreground(CardBlueColor).Render("[space] to flip it")
 	keys = lipgloss.JoinHorizontal(lipgloss.Center, koText, okText)
 	keys = lipgloss.JoinVertical(lipgloss.Center, nextText, keys)
 	return keys
@@ -39,11 +39,11 @@ func ViewKeys(m Model) string {
 
 func (m Model) View() string {
 	bottomText := lipgloss.NewStyle().
-		Foreground(lipgloss.Color("241")).
+		Foreground(MuteColor).
 		Render("Press q to quit")
 
 	cardStats := lipgloss.NewStyle().
-		Foreground(lipgloss.Color("241")).
+		Foreground(MuteColor).
 		Render(fmt.Sprintf("Card %d out of %d cards", m.CurrentCard+1, len(m.Cards)))
 	combined := lipgloss.JoinVertical(
 		lipgloss.Center,
