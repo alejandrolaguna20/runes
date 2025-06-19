@@ -41,6 +41,10 @@ func selectDeck(m Model) (tea.Model, tea.Cmd) {
 func handleKeys(m Model, msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 	switch msg.String() {
 	case "q":
+		if m.SelectedDeck != nil {
+			m.SelectedDeck = nil
+			return m, nil
+		}
 		return m, tea.Quit
 	case "left", "right":
 		return changeCard(m, msg.String())
