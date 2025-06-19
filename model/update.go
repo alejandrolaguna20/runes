@@ -42,6 +42,7 @@ func handleKeys(m Model, msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 	switch msg.String() {
 	case "q":
 		if m.SelectedDeck != nil {
+			m.CardColor = CardDefaultColor
 			m.SelectedDeck = nil
 			return m, nil
 		}
