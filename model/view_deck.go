@@ -52,7 +52,7 @@ func deckView(m Model) string {
 
 	cardStats := lipgloss.NewStyle().
 		Foreground(MuteColor).
-		Render(fmt.Sprintf("Card %d out of %d cards", m.CurrentCard+1, len(m.Cards)))
+		Render(fmt.Sprintf("Card %d out of %d cards", m.CurrentCard+1, len((*m.Cards))))
 	combined := lipgloss.JoinVertical(
 		lipgloss.Center,
 		cardStats,

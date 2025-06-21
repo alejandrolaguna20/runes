@@ -4,6 +4,7 @@ type Card struct {
 	Front          string
 	Back           string
 	IsFlipped      bool
-	timesCorrect   int
-	timesIncorrect int
+	TimesCorrect   int
+	TimesIncorrect int
+	Hidden         bool
 }

@@ -8,10 +8,10 @@ import (
 func viewCard(m Model) string {
 	var content string
 
-	if m.Cards[m.CurrentCard].IsFlipped {
-		content = m.Cards[m.CurrentCard].Back
+	if (*m.Cards)[m.CurrentCard].IsFlipped {
+		content = (*m.Cards)[m.CurrentCard].Back
 	} else {
-		content = m.Cards[m.CurrentCard].Front
+		content = (*m.Cards)[m.CurrentCard].Front
 	}
 
 	wrapped := wordwrap.WrapString(content, uint(m.viewport.Width)/3)

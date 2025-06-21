@@ -16,7 +16,7 @@ type Model struct {
 	ready        bool
 	Decks        []string
 	SelectedDeck *decks.Deck
-	Cards        []cards.Card
+	Cards        *[]cards.Card
 	CurrentCard  int
 }
 
@@ -35,11 +35,15 @@ func CreateModel() Model {
 	m := Model{
 		CardColor: CardDefaultColor,
 		Decks:     decks,
-		Cards:     []cards.Card{},
+		Cards:     nil,
 	}
 	m.CurrentCard = 0
 	//m.CurrentCard = rand.Intn(len(m.Cards) - 1)
 	return m
+}
+
+func (m Model) GetCurrentCard() *cards.Card {
+	return &(*m.Cards)[m.CurrentCard]
 }
 
 func (m Model) Init() tea.Cmd {

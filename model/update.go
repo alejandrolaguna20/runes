@@ -18,12 +18,13 @@ func resize(m Model, msg tea.WindowSizeMsg) (tea.Model, tea.Cmd) {
 }
 
 func flipCard(m Model) (tea.Model, tea.Cmd) {
-	if m.Cards[m.CurrentCard].IsFlipped {
+	currentCard := m.GetCurrentCard()
+	if currentCard.IsFlipped {
 		m.CardColor = CardDefaultColor
 	} else {
 		m.CardColor = CardBlueColor
 	}
-	m.Cards[m.CurrentCard].IsFlipped = !m.Cards[m.CurrentCard].IsFlipped
+	currentCard.IsFlipped = !currentCard.IsFlipped
 	return m, nil
 }
 
@@ -33,8 +34,25 @@ func selectDeck(m Model) (tea.Model, tea.Cmd) {
 	if err != nil {
 		panic(err.Error())
 	}
-	m.Cards = m.SelectedDeck.Cards
+	m.Cards = &m.SelectedDeck.Cards
 	m.CurrentCard = 0
+	return m, nil
+}
+
+func updateCard(m Model, status string) (tea.Model, tea.Cmd) {
+	currentCard := m.GetCurrentCard()
+	if status == "o" {
+		currentCard.TimesCorrect++
+	} else {
+		currentCard.TimesIncorrect++
+	}
+
+	currentCard.Hidden = true
+
+	if m.CurrentCard >= len((*m.Cards)) && len((*m.Cards)) > 0 {
+		m.CurrentCard = 0
+	}
+
 	return m, nil
 }
 
@@ -49,6 +67,8 @@ func handleKeys(m Model, msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 		return m, tea.Quit
 	case "left", "right":
 		return changeCard(m, msg.String())
+	case "k", "o":
+		return updateCard(m, msg.String())
 	case " ":
 		return actOnCard(m)
 	}

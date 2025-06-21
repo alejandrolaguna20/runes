@@ -17,7 +17,7 @@ func changeCard(m Model, direction string) (tea.Model, tea.Cmd) {
 	if m.SelectedDeck == nil {
 		maxPos = len(m.Decks) - 1
 	} else {
-		maxPos = len(m.Cards) - 1
+		maxPos = len((*m.Cards)) - 1
 	}
 
 	nextPos = m.CurrentCard + 1
